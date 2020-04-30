@@ -2,6 +2,7 @@ import React from "react";
 
 // reactstrap components
 import { Container } from "reactstrap";
+import { inject, observer } from "mobx-react";
 
 // core components
 import DemoNavbar from "components/Navbars/DemoNavbar.js";
@@ -34,6 +35,7 @@ class Users extends React.Component {
   }
   render() {
     const { users, isLoading } = this.state;
+
     return (
       <>
         <DemoNavbar />
@@ -54,4 +56,4 @@ class Users extends React.Component {
   }
 }
 
-export default Users;
+export default inject("commonStore")(observer(Users));

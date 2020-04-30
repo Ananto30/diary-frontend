@@ -1,14 +1,12 @@
 import React from "react";
 
 // reactstrap components
-import { Button, Card, Container, Row, Col } from "reactstrap";
-import { useParams } from "react-router-dom";
+import { Container } from "reactstrap";
+import { withRouter } from "react-router-dom";
 // core components
 import DemoNavbar from "components/Navbars/DemoNavbar.js";
 import SimpleFooter from "components/Footers/SimpleFooter.js";
 import DiaryCard from "components/Diary/DiaryCard.js";
-
-import { withRouter } from "react-router-dom";
 
 class Diary extends React.Component {
   constructor(props) {

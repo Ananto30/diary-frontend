@@ -16,6 +16,9 @@ import Profile from "views/examples/Profile.js";
 import Register from "views/examples/Register.js";
 import Users from "views/examples/Users.js";
 import Diary from "views/examples/Diary.js";
+import DiaryList from "views/examples/DiaryList.js";
+import DiaryEditor from "views/examples/DiaryEditor";
+import PrivateRoute from "components/PrivateRoute";
 
 import commonStore from "store/commonStore.js";
 
@@ -37,31 +40,44 @@ ReactDOM.render(
           render={(props) => <Landing {...props} />}
         />
         <Route path="/login" exact render={(props) => <Login {...props} />} />
-        <Route
-          path="/profile"
-          exact
-          render={(props) => <Profile {...props} />}
-        />
+
         <Route
           path="/register-page"
           exact
           render={(props) => <Register {...props} />}
         />
-        <Route
-          path="/users-page"
-          exact
-          render={(props) => <Users {...props} />}
-        />
-        <Route
-          path="/profile/:id"
-          exact
-          render={(props) => <Profile {...props} />}
-        />
-        <Route
-          path="/diary-page/:id"
-          exact
-          render={(props) => <Diary {...props} />}
-        />
+
+        <PrivateRoute>
+          <Route path="/users" exact render={(props) => <Users {...props} />} />
+          <Route
+            path="/profile"
+            exact
+            render={(props) => <Profile {...props} />}
+          />
+          <Route
+            path="/profile/:id"
+            exact
+            render={(props) => <Profile {...props} />}
+          />
+          <Route
+            path="/diary"
+            exact
+            render={(props) => <DiaryList {...props} />}
+          />
+
+          <Route
+            path="/diary/editor"
+            exact
+            render={(props) => <DiaryEditor {...props} />}
+          />
+
+          <Route
+            path="/diary/:id"
+            exact
+            render={(props) => <Diary {...props} />}
+          />
+        </PrivateRoute>
+
         <Redirect to="/" />
       </Switch>
     </BrowserRouter>

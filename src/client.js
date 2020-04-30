@@ -18,14 +18,10 @@ const getHeader = () => {
 
 const Auth = {
   login: (email, password) =>
-    api.post(
-      "/auth/login",
-      {
-        email: email,
-        password: password,
-      },
-      getHeader()
-    ),
+    api.post("/auth/login", {
+      email: email,
+      password: password,
+    }),
 };
 
 const User = {
@@ -33,7 +29,21 @@ const User = {
   getById: (id) => api.get(`user/${id}`, getHeader()),
 };
 
+const Diary = {
+  getDiaries: () => api.get("diary/", getHeader()),
+  createDiary: (title, content) =>
+    api.post(
+      "/diary",
+      {
+        title: title,
+        content: content,
+      },
+      getHeader()
+    ),
+};
+
 export default {
   Auth,
   User,
+  Diary,
 };

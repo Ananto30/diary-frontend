@@ -16,7 +16,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { Redirect } from "react-router";
+import { withRouter } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
 // core components
@@ -27,9 +27,6 @@ import client from "client.js";
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      redirect: false,
-    };
     this.handleLogin = this.handleLogin.bind(this);
   }
 
@@ -45,19 +42,15 @@ class Login extends React.Component {
     client.Auth.login(data.get("email"), data.get("password"))
       .then((res) => {
         if (res.status === 200) {
-          localStorage.setItem("jwtToken", res.data.access_token);
           this.props.commonStore.setAuthToken(res.data.access_token);
-          this.setState({ redirect: true });
+
+          this.props.history.push("/profile");
         }
       })
       .catch(console.log);
   }
 
   render() {
-    const { redirect } = this.state;
-
-    if (redirect) return <Redirect to="/profile" />;
-
     return (
       <>
         <DemoNavbar />
@@ -202,4 +195,4 @@ class Login extends React.Component {
   }
 }
 
-export default inject("commonStore")(observer(Login));
+export default inject("commonStore")(observer(withRouter(Login)));

@@ -1,0 +1,7 @@
+export default {
+  login: "/login",
+  profile: "/profile",
+  users: "/users",
+  diary: "/diary",
+  editor: "/diary/editor",
+};

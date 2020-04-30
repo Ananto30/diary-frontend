@@ -21,8 +21,10 @@ import {
   Col,
   UncontrolledTooltip,
 } from "reactstrap";
-
+import { withRouter, NavLink as RRNavLink } from "react-router-dom";
 import { inject, observer } from "mobx-react";
+
+import routes from "routes.js";
 
 class DemoNavbar extends React.Component {
   constructor(props) {
@@ -31,6 +33,7 @@ class DemoNavbar extends React.Component {
       collapseClasses: "",
       collapseOpen: false,
     };
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   componentDidMount() {
@@ -51,6 +54,12 @@ class DemoNavbar extends React.Component {
     });
   };
 
+  handleLogout(e) {
+    e.preventDefault();
+    this.props.commonStore.resetAuth();
+    this.props.history.push("/login");
+  }
+
   render() {
     const user = this.props.commonStore.loggedUser;
     return (
@@ -64,10 +73,10 @@ class DemoNavbar extends React.Component {
           >
             <Container>
               <NavbarBrand className="mr-lg-5" to="/" tag={Link}>
-                <img
+                {/* <img
                   alt="..."
                   src={require("assets/img/brand/argon-react-white.png")}
-                />
+                /> */}
               </NavbarBrand>
               <button className="navbar-toggler" id="navbar_global">
                 <span className="navbar-toggler-icon" />
@@ -83,10 +92,10 @@ class DemoNavbar extends React.Component {
                   <Row>
                     <Col className="collapse-brand" xs="6">
                       <Link to="/">
-                        <img
+                        {/* <img
                           alt="..."
                           src={require("assets/img/brand/argon-react.png")}
-                        />
+                        /> */}
                       </Link>
                     </Col>
                     <Col className="collapse-close" xs="6">
@@ -100,95 +109,50 @@ class DemoNavbar extends React.Component {
                 <Nav className="navbar-nav-hover align-items-lg-center" navbar>
                   <UncontrolledDropdown nav>
                     <DropdownToggle nav>
-                      <i className="ni ni-ui-04 d-lg-none mr-1" />
-                      <span className="nav-link-inner--text">Components</span>
-                    </DropdownToggle>
-                    <DropdownMenu className="dropdown-menu-xl">
-                      <div className="dropdown-menu-inner">
-                        <Media
-                          className="d-flex align-items-center"
-                          href="https://demos.creative-tim.com/argon-design-system-react/#/documentation/overview?ref=adsr-navbar"
-                          target="_blank"
-                        >
-                          <div className="icon icon-shape bg-gradient-primary rounded-circle text-white">
-                            <i className="ni ni-spaceship" />
-                          </div>
-                          <Media body className="ml-3">
-                            <h6 className="heading text-primary mb-md-1">
-                              Getting started
-                            </h6>
-                            <p className="description d-none d-md-inline-block mb-0">
-                              Learn how to use Argon compiling Scss, change
-                              brand colors and more.
-                            </p>
-                          </Media>
-                        </Media>
-                        <Media
-                          className="d-flex align-items-center"
-                          href="https://demos.creative-tim.com/argon-design-system-react/#/documentation/colors?ref=adsr-navbar"
-                          target="_blank"
-                        >
-                          <div className="icon icon-shape bg-gradient-success rounded-circle text-white">
-                            <i className="ni ni-palette" />
-                          </div>
-                          <Media body className="ml-3">
-                            <h6 className="heading text-primary mb-md-1">
-                              Foundation
-                            </h6>
-                            <p className="description d-none d-md-inline-block mb-0">
-                              Learn more about colors, typography, icons and the
-                              grid system we used for Argon.
-                            </p>
-                          </Media>
-                        </Media>
-                        <Media
-                          className="d-flex align-items-center"
-                          href="https://demos.creative-tim.com/argon-design-system-react/#/documentation/alert?ref=adsr-navbar"
-                          target="_blank"
-                        >
-                          <div className="icon icon-shape bg-gradient-warning rounded-circle text-white">
-                            <i className="ni ni-ui-04" />
-                          </div>
-                          <Media body className="ml-3">
-                            <h5 className="heading text-warning mb-md-1">
-                              Components
-                            </h5>
-                            <p className="description d-none d-md-inline-block mb-0">
-                              Browse our 50 beautiful handcrafted components
-                              offered in the Free version.
-                            </p>
-                          </Media>
-                        </Media>
-                      </div>
-                    </DropdownMenu>
-                  </UncontrolledDropdown>
-
-                  <UncontrolledDropdown nav>
-                    <DropdownToggle nav>
                       <i className="ni ni-collection d-lg-none mr-1" />
-                      <span className="nav-link-inner--text">Examples</span>
+                      <span className="nav-link-inner--text">Pages</span>
                     </DropdownToggle>
                     <DropdownMenu>
                       <DropdownItem to="/landing-page" tag={Link}>
                         Landing
                       </DropdownItem>
-                      <DropdownItem to="/profile" tag={Link}>
+                      <DropdownItem to={routes.profile} tag={Link}>
                         Profile
                       </DropdownItem>
-                      <DropdownItem to="/login" tag={Link}>
+                      <DropdownItem to={routes.login} tag={Link}>
                         Login
                       </DropdownItem>
                       <DropdownItem to="/register-page" tag={Link}>
                         Register
                       </DropdownItem>
-                      <DropdownItem to="/users-page" tag={Link}>
+                      <DropdownItem to={routes.users} tag={Link}>
                         Users
                       </DropdownItem>
-                      <DropdownItem to="/diary-page" tag={Link}>
+                      <DropdownItem to={routes.diary} tag={Link}>
                         Diary
                       </DropdownItem>
                     </DropdownMenu>
                   </UncontrolledDropdown>
+                  <NavItem>
+                    <NavLink
+                      className="nav-link-inner--text"
+                      exact
+                      to={routes.users}
+                      tag={RRNavLink}
+                    >
+                      Users
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink
+                      className="nav-link-inner--text"
+                      exact
+                      to={routes.diary}
+                      tag={RRNavLink}
+                    >
+                      Diaries
+                    </NavLink>
+                  </NavItem>
                 </Nav>
                 <Nav
                   className="navbar-nav-hover align-items-lg-center ml-lg-auto"
@@ -259,7 +223,11 @@ class DemoNavbar extends React.Component {
                     </UncontrolledTooltip>
                   </NavItem>
 
-                  {user != null ? <UserNav user={user} /> : <LoginButton />}
+                  {user != null ? (
+                    <UserNav user={user} handleLogout={this.handleLogout} />
+                  ) : (
+                    <LoginButton />
+                  )}
                 </Nav>
               </UncontrolledCollapse>
             </Container>
@@ -270,7 +238,7 @@ class DemoNavbar extends React.Component {
   }
 }
 
-const UserNav = ({ user }) => {
+const UserNav = ({ user, handleLogout }) => {
   return (
     <UncontrolledDropdown nav>
       <DropdownToggle nav>
@@ -286,8 +254,17 @@ const UserNav = ({ user }) => {
       </DropdownToggle>
 
       <DropdownMenu>
-        <DropdownItem to="/profile" tag={Link}>
+        <DropdownItem to={routes.editor} tag={Link}>
+          <i className="fa fa-book" />
+          Create diary
+        </DropdownItem>
+        <DropdownItem to={routes.profile} tag={Link}>
+          <i className="fa fa-user" />
           Profile
+        </DropdownItem>
+        <DropdownItem onClick={handleLogout}>
+          <i className="fa fa-sign-out" />
+          Logout
         </DropdownItem>
       </DropdownMenu>
     </UncontrolledDropdown>
@@ -311,4 +288,4 @@ const LoginButton = () => {
   );
 };
 
-export default inject("commonStore")(observer(DemoNavbar));
+export default inject("commonStore")(observer(withRouter(DemoNavbar)));

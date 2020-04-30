@@ -2,7 +2,6 @@ import React from "react";
 
 // reactstrap components
 import { Container } from "reactstrap";
-import { Redirect } from "react-router";
 import { withRouter } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
@@ -48,9 +47,6 @@ class Profile extends React.Component {
   render() {
     const { profileInfo, isLoading } = this.state;
     const loggedUser = this.props.commonStore.loggedUser;
-    const authToken = this.props.commonStore.authToken;
-
-    if (!authToken) return <Redirect to="/login" />;
 
     return (
       <>

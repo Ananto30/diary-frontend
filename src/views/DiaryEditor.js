@@ -13,9 +13,10 @@ class DiaryEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // content: Slate.initialValue,
+      title: null,
+      content: null,
     };
-    this.handleCreateDiary = this.handleCreateDiary.bind(this);
+    this.handleSaveDiary = this.handleSaveDiary.bind(this);
   }
 
   componentDidMount() {
@@ -24,7 +25,7 @@ class DiaryEditor extends React.Component {
     if (this.refs.main) this.refs.main.scrollTop = 0;
   }
 
-  handleCreateDiary(e) {
+  handleSaveDiary(e) {
     e.preventDefault();
     const data = new FormData(e.target);
     client.Diary.createDiary(
@@ -43,7 +44,7 @@ class DiaryEditor extends React.Component {
           <section className="section">
             <Container>
               <div className="mt-6">
-                <Form role="form" onSubmit={this.handleCreateDiary}>
+                <Form role="form" onSubmit={this.handleSaveDiary}>
                   <Row>
                     <Col className="order-lg-1" lg="9">
                       <Input
@@ -68,7 +69,7 @@ class DiaryEditor extends React.Component {
                         type="submit"
                         size="sm"
                       >
-                        Create
+                        Save
                       </Button>
                     </Col>
                     <Col className="border-top order-lg-3 mt-3" lg="12">

@@ -4,4 +4,5 @@ export default {
   users: "/users",
   diary: "/diary",
   editor: "/diary/editor",
+  myDiaries: "/my-diaries"
 };

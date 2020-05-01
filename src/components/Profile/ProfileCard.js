@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Card, Row, Col, UncontrolledTooltip } from "reactstrap";
-
+import routes from "routes.js";
+import { Link } from "react-router-dom";
 const ProfileCard = ({ profileInfo }) => {
   return (
     <Card className="card-profile shadow my-9">
@@ -42,10 +43,10 @@ const ProfileCard = ({ profileInfo }) => {
           <Col className="order-lg-1" lg="4">
             <div className="card-profile-stats d-flex justify-content-center">
               <div>
-                <a id="tooltip837440416" href="/login-page">
+                <Link id="tooltip837440416" to={routes.myDiaries}>
                   <span className="heading">22</span>
                   <span className="description">Diaries</span>
-                </a>
+                </Link>
               </div>
 
               <UncontrolledTooltip

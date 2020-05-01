@@ -256,7 +256,7 @@ const UserNav = ({ user, handleLogout }) => {
       <DropdownMenu>
         <DropdownItem to={routes.editor} tag={Link}>
           <i className="fa fa-book" />
-          Create diary
+          Today's diary
         </DropdownItem>
         <DropdownItem to={routes.profile} tag={Link}>
           <i className="fa fa-user" />

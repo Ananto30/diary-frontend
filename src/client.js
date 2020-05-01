@@ -31,6 +31,7 @@ const User = {
 
 const Diary = {
   getDiaries: () => api.get("diary/", getHeader()),
+  getMyDiaries: () => api.get("diary/mine", getHeader()),
   createDiary: (title, content) =>
     api.post(
       "/diary",

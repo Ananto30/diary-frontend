@@ -9,18 +9,21 @@ import "assets/vendor/font-awesome/css/font-awesome.min.css";
 // import "assets/scss/argon-design-system-react.scss";
 import "assets/css/argon-design-system-react.css";
 
-import Index from "views/Index.js";
-import Landing from "views/examples/Landing.js";
-import Login from "views/examples/Login.js";
-import Profile from "views/examples/Profile.js";
-import Register from "views/examples/Register.js";
-import Users from "views/examples/Users.js";
-import Diary from "views/examples/Diary.js";
-import DiaryList from "views/examples/DiaryList.js";
-import DiaryEditor from "views/examples/DiaryEditor";
+import Index from "views/Index";
+import Landing from "views/Landing";
+import Login from "views/Login";
+import Profile from "views/Profile";
+import Register from "views/Register";
+import Users from "views/Users";
+import Diary from "views/Diary";
+import DiaryList from "views/DiaryList";
+import DiaryEditor from "views/DiaryEditor";
 import PrivateRoute from "components/PrivateRoute";
 
-import commonStore from "store/commonStore.js";
+import routes from "routes";
+
+import commonStore from "store/commonStore";
+import MyDiaries from "views/MyDiaries";
 
 const stores = {
   commonStore,
@@ -39,7 +42,11 @@ ReactDOM.render(
           exact
           render={(props) => <Landing {...props} />}
         />
-        <Route path="/login" exact render={(props) => <Login {...props} />} />
+        <Route
+          path={routes.login}
+          exact
+          render={(props) => <Login {...props} />}
+        />
 
         <Route
           path="/register-page"
@@ -48,37 +55,46 @@ ReactDOM.render(
         />
 
         <PrivateRoute>
-          <Route path="/users" exact render={(props) => <Users {...props} />} />
           <Route
-            path="/profile"
+            path={routes.users}
+            exact
+            render={(props) => <Users {...props} />}
+          />
+          <Route
+            path={routes.profile}
             exact
             render={(props) => <Profile {...props} />}
           />
           <Route
-            path="/profile/:id"
+            path={`${routes.profile}/:id`}
             exact
             render={(props) => <Profile {...props} />}
           />
           <Route
-            path="/diary"
+            path={routes.diary}
             exact
             render={(props) => <DiaryList {...props} />}
           />
 
           <Route
-            path="/diary/editor"
+            path={routes.editor}
             exact
             render={(props) => <DiaryEditor {...props} />}
           />
 
           <Route
-            path="/diary/:id"
+            path={`${routes.diary}/:id`}
             exact
             render={(props) => <Diary {...props} />}
           />
+          <Route
+            path={routes.myDiaries}
+            exact
+            render={(props) => <MyDiaries {...props} />}
+          />
         </PrivateRoute>
 
-        <Redirect to="/" />
+        <Redirect to={routes.login} />
       </Switch>
     </BrowserRouter>
   </Provider>,

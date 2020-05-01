@@ -23,6 +23,7 @@ import { inject, observer } from "mobx-react";
 import DemoNavbar from "components/Navbars/DemoNavbar.js";
 import SimpleFooter from "components/Footers/SimpleFooter.js";
 import client from "client.js";
+import routes from "routes";
 
 class Login extends React.Component {
   constructor(props) {
@@ -43,8 +44,14 @@ class Login extends React.Component {
       .then((res) => {
         if (res.status === 200) {
           this.props.commonStore.setAuthToken(res.data.access_token);
-
-          this.props.history.push("/profile");
+          client.User.getById("me")
+            .then((res) => {
+              if (res.status === 200) {
+                this.props.commonStore.setLoggedUser(res.data);
+              }
+            })
+            .catch(console.log);
+          this.props.history.push(routes.profile);
         }
       })
       .catch(console.log);

@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Card, Row, Col } from "reactstrap";
+import { Link } from "react-router-dom";
 
 const UserCard = ({ users }) => {
   return (
@@ -24,7 +25,7 @@ const UserCard = ({ users }) => {
 
               <div className="text-center mt-9 mb-3">
                 <h5>
-                  <a href={`/profile/${user.id}`}>{user.name}</a>{" "}
+                  <Link to={`/profile/${user.id}`}>{user.name}</Link>{" "}
                   <span className="font-weight-light">, {user.age}</span>
                 </h5>
                 <div className=" font-weight-300">

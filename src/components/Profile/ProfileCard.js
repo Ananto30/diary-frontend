@@ -43,7 +43,7 @@ const ProfileCard = ({ profileInfo }) => {
           <Col className="order-lg-1" lg="4">
             <div className="card-profile-stats d-flex justify-content-center">
               <div>
-                <Link id="tooltip837440416" to={routes.myDiaries}>
+                <Link id="tooltip837440416" to={`${routes.userDiaries}/${profileInfo.id}`}>
                   <span className="heading">22</span>
                   <span className="description">Diaries</span>
                 </Link>

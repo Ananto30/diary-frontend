@@ -6,11 +6,11 @@ import { withRouter } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
 // core components
-import DemoNavbar from "components/Navbars/DemoNavbar.js";
-import SimpleFooter from "components/Footers/SimpleFooter.js";
-import ProfileCard from "components/Profile/ProfileCard.js";
-import Loader from "components/Loader.js";
-import client from "client.js";
+import DemoNavbar from "components/Navbars/DemoNavbar";
+import SimpleFooter from "components/Footers/SimpleFooter";
+import ProfileCard from "components/Profile/ProfileCard";
+import Loader from "components/Loader";
+import client from "client";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -30,7 +30,6 @@ class Profile extends React.Component {
     client.User.getById(authU)
       .then((res) => {
         if (res.status === 200) {
-          this.props.commonStore.setLoggedUser(res.data);
           this.setState({
             profileInfo: res.data,
             isLoading: false,

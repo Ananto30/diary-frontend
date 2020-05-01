@@ -23,7 +23,7 @@ import PrivateRoute from "components/PrivateRoute";
 import routes from "routes";
 
 import commonStore from "store/commonStore";
-import MyDiaries from "views/MyDiaries";
+import UserDiaries from "views/UserDiaries";
 
 const stores = {
   commonStore,
@@ -88,9 +88,9 @@ ReactDOM.render(
             render={(props) => <Diary {...props} />}
           />
           <Route
-            path={routes.myDiaries}
+            path={`${routes.userDiaries}/:uid`}
             exact
-            render={(props) => <MyDiaries {...props} />}
+            render={(props) => <UserDiaries {...props} />}
           />
         </PrivateRoute>
 

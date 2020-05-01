@@ -3,13 +3,14 @@ import React from "react";
 // reactstrap components
 import { Container } from "reactstrap";
 // core components
-import DemoNavbar from "components/Navbars/DemoNavbar.js";
-import SimpleFooter from "components/Footers/SimpleFooter.js";
-import DiaryCards from "components/Diary/DiaryCards.js";
-import client from "client.js";
+import DemoNavbar from "components/Navbars/DemoNavbar";
+import SimpleFooter from "components/Footers/SimpleFooter";
+import DiaryCards from "components/Diary/DiaryCards";
+import client from "client";
+import { inject, observer } from "mobx-react";
+import { withRouter } from "react-router";
 
-
-class MyDiaries extends React.Component {
+class UserDiaries extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,7 +22,13 @@ class MyDiaries extends React.Component {
     document.scrollingElement.scrollTop = 0;
     if (this.refs.main) this.refs.main.scrollTop = 0;
 
-    client.Diary.getMyDiaries()
+    const { match } = this.props;
+    var uid = match.params.uid;
+    if (uid == null) {
+      uid = this.props.commonStore.loggedUser.id;
+    }
+
+    client.Diary.getUserDiaries(uid)
       .then((res) => {
         this.setState({ diaries: res.data.diaries });
       })
@@ -35,7 +42,7 @@ class MyDiaries extends React.Component {
         <main className="profile-page" ref="main">
           <section className="section">
             <Container>
-              <h3 className="mt-6">My Diaries</h3>
+              <h3 className="mt-6">Diaries</h3>
               <DiaryCards diaries={this.state.diaries} />
             </Container>
           </section>
@@ -46,4 +53,4 @@ class MyDiaries extends React.Component {
   }
 }
 
-export default MyDiaries;
+export default inject("commonStore")(observer(withRouter(UserDiaries)));

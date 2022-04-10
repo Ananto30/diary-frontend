@@ -27,7 +27,7 @@
     "slate": "^0.57.2",
     "slate-history": "^0.57.2",
     "slate-react": "^0.57.2",
-    "tinymce": "^5.2.2"
+    "tinymce": "^5.10.0"
   },
   "scripts": {
     "start": "react-scripts start",
